@@ -19,8 +19,19 @@ namespace TechJobs.Controllers
         public IActionResult Index(int id)
         {
             // TODO #1 - get the Job with the given ID and pass it into the view
+            SearchJobsViewModel jobsViewModel = new SearchJobsViewModel
+            {
+                Jobs = jobData.Jobs
+            };
 
-            return View();
+            foreach (var item in jobsViewModel.Jobs)
+            {
+                if (item.ID == id)
+                {
+                    return View(item);
+                }
+            }
+            return Redirect("/Job?=1");
         }
 
         public IActionResult New()
